@@ -16,13 +16,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0jt"]
-size = Vector2(14.444445, 14.555555)
+[sub_resource type="CircleShape2D" id="CircleShape2D_sq0jt"]
 
 [node name="Cat" type="Node2D" unique_id=481893930]
+scale = Vector2(0.5, 0.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1140738681]
 script = ExtResource("1_sq0jt")
+max_fall_speed = 400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1791933442]
 sprite_frames = SubResource("SpriteFrames_lni28")
@@ -31,7 +32,7 @@ animation = &"Roll"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1411382272]
 position = Vector2(-1.0000029, -1.500001)
 scale = Vector2(9, 9)
-shape = SubResource("RectangleShape2D_sq0jt")
+shape = SubResource("CircleShape2D_sq0jt")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1448227505]
 texture = ExtResource("1_3vslg")
