@@ -15,6 +15,7 @@ const SPAWN_MARGIN: float = 120.0
 # 可配置参数
 # ============================================================
 @export var cat_scene: PackedScene          # 要生成的猫场景
+@export var pin_scene: PackedScene          # Pin 场景
 @export var throw_duration: float = 1.0     # 投掷飞行时间（秒）
 
 # 重力（与 Cat.gd 保持一致）
@@ -22,6 +23,14 @@ const GRAVITY: float = 980.0
 
 # 屏幕中心点（地图 1152×648 的正中央）
 const SCREEN_CENTER := Vector2(576.0, 324.0)
+
+# 当前唯一的 Pin 实例
+var _current_pin: Node2D = null
+# 投掷生成的猫引用（用于连线）
+var _current_cat: Node2D = null
+# 连线节点
+var _line: Line2D = null
+
 
 # ============================================================
 # 生命周期
@@ -31,13 +40,26 @@ func _ready() -> void:
 	# 如果没在编辑器中指定 cat_scene，尝试自动加载
 	if cat_scene == null:
 		cat_scene = preload("res://prefab/cat.tscn")
+	if pin_scene == null:
+		pin_scene = preload("res://prefab/pin.tscn")
 
 	# 只生成一次，扔向屏幕中心
 	spawn_and_throw_to_center()
 
 
 func _process(delta: float) -> void:
-	pass
+	_update_line()
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			# 左键：没有 Pin 时才创建新的
+			if _current_pin == null:
+				_place_pin(get_global_mouse_position())
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			# 右键：删除 Pin，猫恢复自由弹跳
+			_remove_pin()
 
 
 # ============================================================
@@ -59,6 +81,16 @@ func spawn_and_throw_to(spawn_pos: Vector2, target_pos: Vector2) -> Node2D:
 	add_child(cat)
 	cat.position = spawn_pos
 
+	# 记录猫的引用，用于连线
+	_current_cat = cat
+
+	# 创建连线节点
+	if _line == null:
+		_line = Line2D.new()
+		_line.width = 3.0
+		_line.default_color = Color.WHITE
+		add_child(_line)
+
 	# 给 CharacterBody2D 挂载物理脚本，投掷期间先禁用
 	var body := cat.get_node_or_null("CharacterBody2D")
 	if body != null:
@@ -73,6 +105,81 @@ func spawn_and_throw_to(spawn_pos: Vector2, target_pos: Vector2) -> Node2D:
 # ============================================================
 # 内部方法
 # ============================================================
+
+## 在鼠标点击位置放置 Pin（始终只有一个，每次点击移位置）
+func _place_pin(at_position: Vector2) -> void:
+	if pin_scene == null:
+		return
+	if _current_pin == null:
+		_current_pin = pin_scene.instantiate()
+		add_child(_current_pin)
+	_current_pin.position = at_position
+
+	# 让猫绕 Pin 做圆周运动
+	_start_orbit_on_cat(at_position)
+
+
+## 删除 Pin，猫恢复自由弹跳
+func _remove_pin() -> void:
+	if _current_pin == null:
+		return
+	_current_pin.queue_free()
+	_current_pin = null
+
+	# 猫恢复自由弹跳
+	_stop_orbit_on_cat()
+
+
+## 让猫开始/更新圆周运动，绕 center 旋转
+func _start_orbit_on_cat(center: Vector2) -> void:
+	if _current_cat == null or not is_instance_valid(_current_cat):
+		return
+	var body := _current_cat.get_node_or_null("CharacterBody2D")
+	if body == null:
+		return
+
+	if body.get("_orbiting"):
+		# 已经在绕圈，只更新中心
+		body.update_orbit_center(center)
+	else:
+		# 开始绕圈
+		body.start_orbit(center)
+
+
+## 让猫停止圆周运动，恢复自由弹跳
+func _stop_orbit_on_cat() -> void:
+	if _current_cat == null or not is_instance_valid(_current_cat):
+		return
+	var body := _current_cat.get_node_or_null("CharacterBody2D")
+	if body == null:
+		return
+	if body.get("_orbiting"):
+		body.stop_orbit()
+
+
+## 更新 Pin 到 Cat 的连线
+func _update_line() -> void:
+	if _line == null or _current_pin == null or _current_cat == null:
+		if _line != null:
+			_line.clear_points()
+		return
+	if not is_instance_valid(_current_cat):
+		_line.clear_points()
+		_current_cat = null
+		return
+
+	# 获取 Cat 的 CharacterBody2D 世界位置（物理体才是实际位置）
+	var body := _current_cat.get_node_or_null("CharacterBody2D")
+	var cat_pos: Vector2
+	if body != null:
+		cat_pos = body.global_position
+	else:
+		cat_pos = _current_cat.global_position
+
+	_line.clear_points()
+	_line.add_point(_current_pin.position)
+	_line.add_point(cat_pos)
+
 
 ## 随机选择地图四条边之一的外侧位置
 func _random_edge_spawn_pos() -> Vector2:
