@@ -76,6 +76,14 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# ESC 切换暂停界面显示/隐藏
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		var pause_panel := $CanvasLayer.get_node_or_null("暂停界面")
+		if pause_panel:
+			pause_panel.visible = not pause_panel.visible
+			get_tree().paused = pause_panel.visible
+		return
+
 	if not _input_enabled:
 		return
 	if event is InputEventMouseButton and event.pressed:

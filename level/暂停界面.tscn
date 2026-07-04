@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bm3qe0sgoqhpu"]
+
+[ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="1_bd1ni"]
+[ext_resource type="Script" uid="uid://u1jsspf0iv0g" path="res://scripts/ContinueGame.gd" id="1_ejntu"]
+
+[node name="暂停界面" type="Control" unique_id=1635578515]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=182541547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=1555092378]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 190.0
+offset_right = 820.0
+offset_bottom = 540.0
+alignment = 1
+vertical = true
+
+[node name="继续" type="Button" parent="BoxContainer" unique_id=826705300]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "继续游戏"
+script = ExtResource("1_ejntu")
+
+[node name="退出" type="Button" parent="BoxContainer" unique_id=509180772]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "退出游戏"
+script = ExtResource("1_bd1ni")
