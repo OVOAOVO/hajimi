@@ -28,8 +28,10 @@ var _max_value_label: Label = null
 var _first_tip_control: Control = null
 var _insert_label: Label = null
 var _remove_label: Label = null
+var _rotate_label: Label = null
 var _first_landing_done: bool = false
 var _pin_placed_once: bool = false
+var _rotate_shown_once: bool = false
 
 # 重力（与 Cat.gd 保持一致）
 const GRAVITY: float = 980.0
@@ -73,6 +75,7 @@ func _ready() -> void:
 	if _first_tip_control:
 		_insert_label = _first_tip_control.get_node_or_null("插入点")
 		_remove_label = _first_tip_control.get_node_or_null("拔出点")
+		_rotate_label = _first_tip_control.get_node_or_null("旋转提示")
 
 	# 随机撒金币
 	_spawn_coins()
@@ -168,7 +171,7 @@ func _place_pin(at_position: Vector2) -> void:
 		add_child(_current_pin)
 	_current_pin.position = at_position
 
-	# 第一次放置 Pin：淡出插入提示 → 淡入拔出提示
+	# 第一次放置 Pin：淡出插入提示 → 淡入拔出提示（旋转提示在拔出后才触发）
 	if not _pin_placed_once:
 		_pin_placed_once = true
 		if _insert_label and _insert_label.visible:
@@ -188,16 +191,30 @@ func _remove_pin() -> void:
 	_current_pin.queue_free()
 	_current_pin = null
 
-	# 淡出所有提示
+	# 猫恢复自由弹跳
+	_stop_orbit_on_cat()
+
+	# 第一次拔出 Pin：触发旋转提示的淡入 → 淡出序列
+	if _pin_placed_once and not _rotate_shown_once:
+		_rotate_shown_once = true
+		# 先淡出拔出提示
+		if _remove_label and _remove_label.visible:
+			_fade_out(_remove_label, 0.3)
+		# 延迟后淡入旋转提示，再自动淡出
+		var tw := create_tween()
+		tw.tween_interval(0.5)
+		tw.tween_callback(_show_rotate_tip_sequence)
+		return
+
+	# 后续操作：正常淡出所有提示
 	if _insert_label and _insert_label.visible:
 		_fade_out(_insert_label, 0.3)
 	if _remove_label and _remove_label.visible:
 		_fade_out(_remove_label, 0.3)
+	if _rotate_label and _rotate_label.visible:
+		_fade_out(_rotate_label, 0.3)
 	if _first_tip_control and _first_tip_control.visible:
 		_fade_out(_first_tip_control, 0.3)
-
-	# 猫恢复自由弹跳
-	_stop_orbit_on_cat()
 
 
 ## 让猫开始/更新圆周运动，绕 center 旋转
@@ -227,6 +244,22 @@ func _stop_orbit_on_cat() -> void:
 		body.stop_orbit()
 
 
+## 淡入旋转提示，显示一段时间后自动淡出
+func _show_rotate_tip_sequence() -> void:
+	if _rotate_label == null or not is_instance_valid(_rotate_label):
+		return
+	_rotate_label.visible = true
+	_fade_in(_rotate_label, 0.3)
+
+	# 2.5 秒后自动淡出
+	var tw := create_tween()
+	tw.tween_interval(2.5)
+	tw.tween_callback(func():
+		if is_instance_valid(_rotate_label) and _rotate_label.visible:
+			_fade_out(_rotate_label, 0.3)
+	)
+
+
 ## 更新第一次运行提示位置：插入点/拔出点 Label 跟随猫上方 100px，不旋转
 func _update_first_tip() -> void:
 	if _current_cat == null or not is_instance_valid(_current_cat):
@@ -251,6 +284,8 @@ func _update_first_tip() -> void:
 			_fade_in(_insert_label, FADE_IN_TIME)
 		if _remove_label:
 			_remove_label.position = screen_center + Vector2(0, TIP_OFFSET_Y) - _remove_label.size / 2.0
+		if _rotate_label:
+			_rotate_label.position = screen_center + Vector2(0, TIP_OFFSET_Y) - _rotate_label.size / 2.0
 
 
 

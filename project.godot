@@ -20,6 +20,10 @@ config/icon="res://assets/icon.svg"
 scene_loader="*uid://bpedhl5ugdhsm"
 AudioManager="*uid://dmbuhmyldehmt"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/LevelManeger/plugin.cfg")

@@ -23,3 +23,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 50
 text = "按鼠标右键拔出"
+
+[node name="旋转提示" type="Label" parent="." unique_id=276918937]
+visible = false
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 50
+text = "只有旋转才能吃到小鱼干~"
