@@ -71,7 +71,7 @@ func play_begin () -> bool:
 	return play_sound(preload("res://assets/SFX/神秘猫叫.wav"))	
 	
 func play_win () -> bool:
-	return play_sound(preload("res://assets/SFX/拔出锚点.wav"))	
+	return play_sound(preload("res://assets/SFX/胜利音效.wav"))	
 	
 func _on_player_finished(player: AudioStreamPlayer):
 	# 音效播放完成，回收到池中

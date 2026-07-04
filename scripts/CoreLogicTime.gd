@@ -314,10 +314,12 @@ func _update_coin_ui() -> void:
 ## 显示结算界面并暂停游戏
 func _show_settlement() -> void:
 	var settlement := $CanvasLayer.get_node_or_null("结算界面")
+	AudioManager.play_win()
 	if settlement:
 		settlement.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		settlement.visible = true
 		get_tree().paused = true
+		
 
 
 ## 猫碰到金币时触发，让金币消失（仅在圆周旋转模式下生效）
@@ -333,6 +335,7 @@ func _on_coin_body_entered(body: Node2D, coin: Node2D) -> void:
 	coin.queue_free()
 	_coin_collected += 1
 	_update_coin_ui()
+	AudioManager.play_eat()
 
 
 ## 随机选择地图四条边之一的外侧位置

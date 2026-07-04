@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 scene_loader="*uid://bpedhl5ugdhsm"
+AudioManager="*uid://dmbuhmyldehmt"
 
 [editor_plugins]
 

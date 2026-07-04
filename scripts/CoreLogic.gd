@@ -289,6 +289,7 @@ func _on_coin_body_entered(body: Node2D, coin: Node2D) -> void:
 	coin.queue_free()
 	_coin_alive_count -= 1
 	_update_coin_ui()
+	AudioManager.play_eat()
 	# 金币吃完了 → 显示结算界面并暂停
 	if _coin_alive_count <= 0:
 		_show_settlement()

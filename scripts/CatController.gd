@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 			# 碰到墙壁 → 反转圆周方向
 			orbit_speed = -orbit_speed
 			_orbit_angle = (global_position - _orbit_center).angle()
-
+			AudioManager.play_bounce()
 		# 面朝运动切线方向
 		rotation = _orbit_angle + PI / 2.0
 		return
@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 			cos(angle) * bounce_strength,
 			sin(angle) * bounce_strength
 		)
+		AudioManager.play_bounce()
 
 
 # ============================================================
@@ -83,6 +84,7 @@ func start_orbit(center: Vector2) -> void:
 	_orbit_angle = (global_position - center).angle()
 	_first_fall = false
 	velocity = Vector2.ZERO
+	AudioManager.play_insert()
 
 
 ## 更新圆周运动中心（Pin 移动时调用）
@@ -97,6 +99,7 @@ func stop_orbit() -> void:
 	if not _orbiting:
 		return
 	_orbiting = false
+	AudioManager.play_pull()
 	# 给一个切线方向的初速度，平滑过渡到弹跳
 	var tangent := Vector2(-sin(_orbit_angle), cos(_orbit_angle))
 	velocity = tangent * orbit_speed * _orbit_radius
