@@ -4,11 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://c11lsej2wglye" path="res://prefab/cat.tscn" id="2_mxirh"]
 [ext_resource type="PackedScene" uid="uid://c48sunbtl2f8y" path="res://prefab/map.tscn" id="3_ie7yk"]
 [ext_resource type="PackedScene" uid="uid://dig1ptu56oqdy" path="res://prefab/pin.tscn" id="4_mxirh"]
+[ext_resource type="PackedScene" uid="uid://ytuhgoau7n13" path="res://prefab/coin.tscn" id="5_ie7yk"]
 
 [node name="Game1" type="Node2D" unique_id=180356448]
 script = ExtResource("1_dquaa")
 cat_scene = ExtResource("2_mxirh")
 pin_scene = ExtResource("4_mxirh")
+coin_scene = ExtResource("5_ie7yk")
+coin_count = 5
+coin_margin = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=57827177]
 offset = Vector2(576, 324)

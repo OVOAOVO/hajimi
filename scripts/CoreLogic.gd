@@ -16,7 +16,10 @@ const SPAWN_MARGIN: float = 120.0
 # ============================================================
 @export var cat_scene: PackedScene          # 要生成的猫场景
 @export var pin_scene: PackedScene          # Pin 场景
+@export var coin_scene: PackedScene         # 金币场景
 @export var throw_duration: float = 1.0     # 投掷飞行时间（秒）
+@export var coin_count: int = 15            # 随机撒的金币数量
+@export var coin_margin: float = 40.0       # 金币离地图边缘的最小距离
 
 # 重力（与 Cat.gd 保持一致）
 const GRAVITY: float = 980.0
@@ -42,6 +45,11 @@ func _ready() -> void:
 		cat_scene = preload("res://prefab/cat.tscn")
 	if pin_scene == null:
 		pin_scene = preload("res://prefab/pin.tscn")
+	if coin_scene == null:
+		coin_scene = preload("res://prefab/coin.tscn")
+
+	# 随机撒金币
+	_spawn_coins()
 
 	# 只生成一次，扔向屏幕中心
 	spawn_and_throw_to_center()
@@ -179,6 +187,36 @@ func _update_line() -> void:
 	_line.clear_points()
 	_line.add_point(_current_pin.position)
 	_line.add_point(cat_pos)
+
+
+## 在地图内随机撒金币
+func _spawn_coins() -> void:
+	if coin_scene == null:
+		return
+	for i in range(coin_count):
+		var coin: Node2D = coin_scene.instantiate()
+		add_child(coin)
+		coin.position = Vector2(
+			randf_range(MAP_LEFT + coin_margin, MAP_RIGHT - coin_margin),
+			randf_range(MAP_TOP + coin_margin, MAP_BOTTOM - coin_margin)
+		)
+		# 连接 Area2D 的 body_entered 信号，猫碰到金币就消失
+		var area: Area2D = coin.get_node_or_null("Area2D")
+		if area:
+			area.body_entered.connect(_on_coin_body_entered.bind(coin))
+
+
+## 猫碰到金币时触发，让金币消失（仅在圆周旋转模式下生效）
+func _on_coin_body_entered(body: Node2D, coin: Node2D) -> void:
+	if _current_cat == null or not is_instance_valid(_current_cat):
+		return
+	var cat_body := _current_cat.get_node_or_null("CharacterBody2D")
+	if body != cat_body or not is_instance_valid(coin):
+		return
+	# 只有在圆周运动（_orbiting == true）时才吃掉金币
+	if not cat_body.get("_orbiting"):
+		return
+	coin.queue_free()
 
 
 ## 随机选择地图四条边之一的外侧位置
