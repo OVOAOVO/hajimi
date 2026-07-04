@@ -37,4 +37,4 @@ visible = false
 
 [node name="结算界面" parent="CanvasLayer" unique_id=1913707266 instance=ExtResource("4_8x67e")]
 visible = false
-load_scene = &"uid://by3puhl5ymfln"
+load_scene = &"uid://ckbhkya0m5aqt"
