@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bgpkg38nxi75w"]
+
+[ext_resource type="Script" uid="uid://dfoo6pntfo23e" path="res://scripts/CoreLogic.gd" id="1_4r541"]
+[ext_resource type="PackedScene" uid="uid://c48sunbtl2f8y" path="res://prefab/map.tscn" id="1_54jtc"]
+[ext_resource type="PackedScene" uid="uid://c11lsej2wglye" path="res://prefab/cat.tscn" id="2_0w6oo"]
+[ext_resource type="PackedScene" uid="uid://bxuxqhdboqiat" path="res://prefab/countPanel.tscn" id="2_4r541"]
+[ext_resource type="PackedScene" uid="uid://bm3qe0sgoqhpu" path="res://level/暂停界面.tscn" id="3_0w6oo"]
+[ext_resource type="PackedScene" uid="uid://dig1ptu56oqdy" path="res://prefab/pin.tscn" id="3_8x67e"]
+[ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="4_8x67e"]
+[ext_resource type="PackedScene" uid="uid://ytuhgoau7n13" path="res://prefab/coin.tscn" id="4_brwoi"]
+
+[node name="Game2" type="Node2D" unique_id=30171497]
+script = ExtResource("1_4r541")
+cat_scene = ExtResource("2_0w6oo")
+pin_scene = ExtResource("3_8x67e")
+coin_scene = ExtResource("4_brwoi")
+coin_margin = 100.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1074139911]
+offset = Vector2(576, 324)
+
+[node name="Map" parent="." unique_id=1224135724 instance=ExtResource("1_54jtc")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=331700440]
+
+[node name="CountPanel" parent="CanvasLayer" unique_id=1512344246 instance=ExtResource("2_4r541")]
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 9.0
+offset_bottom = 4.0
+metadata/_edit_use_anchors_ = true
+
+[node name="暂停界面" parent="CanvasLayer" unique_id=1635578515 instance=ExtResource("3_0w6oo")]
+process_mode = 3
+visible = false
+
+[node name="结算界面" parent="CanvasLayer" unique_id=1913707266 instance=ExtResource("4_8x67e")]
+visible = false

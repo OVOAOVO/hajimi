@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://rbsjbm3rd6fn"]
+
+[ext_resource type="Script" uid="uid://bauds7ctnn7x7" path="res://addons/LevelManeger/scripts/加载关卡.gd" id="1_0l53m"]
+[ext_resource type="Script" uid="uid://u1jsspf0iv0g" path="res://scripts/ContinueGame.gd" id="1_s07nm"]
+[ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_0l53m"]
+
+[node name="Node2D" type="Node2D" unique_id=1913707266 node_paths=PackedStringArray("play_button")]
+script = ExtResource("1_0l53m")
+load_scene = &"uid://bgpkg38nxi75w"
+play_button = NodePath("结算界面/BoxContainer/下一关")
+
+[node name="结算界面" type="Control" parent="." unique_id=549673727]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -36.0
+offset_right = -64.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="结算界面" unique_id=1148154674]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="结算界面" unique_id=191891106]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 84.0
+offset_right = 840.0
+offset_bottom = 234.0
+theme_override_font_sizes/font_size = 100
+text = "你过关"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="结算界面" unique_id=1182062451]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 284.0
+offset_right = 820.0
+offset_bottom = 634.0
+alignment = 1
+vertical = true
+
+[node name="下一关" type="Button" parent="结算界面/BoxContainer" unique_id=1465220874]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "下一关"
+script = ExtResource("1_s07nm")
+
+[node name="退出" type="Button" parent="结算界面/BoxContainer" unique_id=504581236]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "退出游戏"
+script = ExtResource("2_0l53m")
