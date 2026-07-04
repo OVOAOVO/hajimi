@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://by3puhl5ymfln"]
+
+[ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_e3myt"]
+
+[node name="通关结算" type="Control" unique_id=1405941113]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -36.0
+offset_right = -1216.0
+offset_bottom = -684.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=634761078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1398896115]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 154.0
+offset_right = 846.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 100
+text = "牛"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=593462081]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 387.0
+offset_right = 820.0
+offset_bottom = 562.0
+alignment = 1
+vertical = true
+
+[node name="退出" type="Button" parent="BoxContainer" unique_id=1646160908]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "退出游戏"
+script = ExtResource("2_e3myt")
