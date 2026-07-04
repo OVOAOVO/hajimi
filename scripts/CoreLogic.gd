@@ -312,5 +312,9 @@ func _animate_throw(cat: Node2D, body: Node2D, from: Vector2, to: Vector2) -> vo
 				body.global_position = cat.global_position
 				body.velocity = Vector2(randf_range(-200, 200), randf_range(-300, -100))
 				body.set_physics_process(true)
+				# 切换为 Roll 动画
+				var sprite: AnimatedSprite2D = body.get_node_or_null("AnimatedSprite2D")
+				if sprite:
+					sprite.play("Roll")
 			_input_enabled = true
 	)

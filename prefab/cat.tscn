@@ -1,18 +1,61 @@
 [gd_scene format=3 uid="uid://c11lsej2wglye"]
 
-[ext_resource type="Texture2D" uid="uid://byvjehdyh0s6p" path="res://assets/icon.svg" id="1_3vslg"]
 [ext_resource type="Script" uid="uid://k5wr2i3sjxty" path="res://scripts/CatController.gd" id="1_sq0jt"]
+[ext_resource type="Texture2D" uid="uid://bh3gbe5gtg3am" path="res://assets/catRoll.png" id="2_sq0jt"]
+[ext_resource type="Texture2D" uid="uid://dwvxbuumwi01v" path="res://assets/catSli.png" id="3_ju4o2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ju4o2"]
+atlas = ExtResource("2_sq0jt")
+region = Rect2(0, 0, 680, 503)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdi4i"]
+atlas = ExtResource("2_sq0jt")
+region = Rect2(680, 0, 680, 503)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcrd0"]
+atlas = ExtResource("2_sq0jt")
+region = Rect2(1360, 0, 680, 503)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aummg"]
+atlas = ExtResource("3_ju4o2")
+region = Rect2(0, 0, 680, 503)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6qok"]
+atlas = ExtResource("3_ju4o2")
+region = Rect2(680, 0, 680, 503)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ginx"]
+atlas = ExtResource("3_ju4o2")
+region = Rect2(1360, 0, 680, 503)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lni28"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ju4o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdi4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcrd0")
+}],
 "loop": true,
 "name": &"Roll",
-"speed": 5.0
+"speed": 15.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aummg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6qok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ginx")
+}],
 "loop": true,
-"name": &"Rotation",
+"name": &"Sli",
 "speed": 5.0
 }]
 
@@ -26,13 +69,13 @@ script = ExtResource("1_sq0jt")
 max_fall_speed = 400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1791933442]
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_lni28")
-animation = &"Roll"
+animation = &"Sli"
+autoplay = "Sli"
+frame_progress = 0.17729469
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1411382272]
 position = Vector2(-1.0000029, -1.500001)
 scale = Vector2(9, 9)
 shape = SubResource("CircleShape2D_sq0jt")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1448227505]
-texture = ExtResource("1_3vslg")
