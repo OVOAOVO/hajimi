@@ -6,27 +6,27 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ju4o2"]
 atlas = ExtResource("2_sq0jt")
-region = Rect2(0, 0, 680, 503)
+region = Rect2(0, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdi4i"]
 atlas = ExtResource("2_sq0jt")
-region = Rect2(680, 0, 680, 503)
+region = Rect2(500, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcrd0"]
 atlas = ExtResource("2_sq0jt")
-region = Rect2(1360, 0, 680, 503)
+region = Rect2(1000, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aummg"]
 atlas = ExtResource("3_ju4o2")
-region = Rect2(0, 0, 680, 503)
+region = Rect2(0, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q6qok"]
 atlas = ExtResource("3_ju4o2")
-region = Rect2(680, 0, 680, 503)
+region = Rect2(500, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ginx"]
 atlas = ExtResource("3_ju4o2")
-region = Rect2(1360, 0, 680, 503)
+region = Rect2(1000, 0, 500, 500)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lni28"]
 animations = [{
@@ -69,10 +69,11 @@ script = ExtResource("1_sq0jt")
 max_fall_speed = 400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1791933442]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lni28")
 animation = &"Roll"
 autoplay = "Sli"
+frame_progress = 0.5796418
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1411382272]
 position = Vector2(-1.0000029, -1.500001)

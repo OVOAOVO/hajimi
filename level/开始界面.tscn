@@ -1,7 +1,29 @@
 [gd_scene format=3 uid="uid://bk5fpvjyrjf0i"]
 
 [ext_resource type="Script" uid="uid://bauds7ctnn7x7" path="res://addons/LevelManeger/scripts/加载关卡.gd" id="1_hs3h7"]
+[ext_resource type="Texture2D" uid="uid://m3d7ha2ekb54" path="res://assets/startMenuBack.png" id="2_75xjn"]
 [ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_m4ijc"]
+[ext_resource type="Texture2D" uid="uid://j7gfpj7cvwaf" path="res://assets/normalButton.png" id="3_n6ku5"]
+[ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="4_mxjnn"]
+[ext_resource type="Texture2D" uid="uid://dfsrsc1iyqnc5" path="res://assets/hoverButton.png" id="5_0mdfe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n6ku5"]
+texture = ExtResource("3_n6ku5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0mdfe"]
+texture = ExtResource("4_mxjnn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mxjnn"]
+texture = ExtResource("5_0mdfe")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5iear"]
+texture = ExtResource("3_n6ku5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lev22"]
+texture = ExtResource("4_mxjnn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b0bs0"]
+texture = ExtResource("5_0mdfe")
 
 [node name="Node2D" type="Node2D" unique_id=462866750 node_paths=PackedStringArray("play_button")]
 script = ExtResource("1_hs3h7")
@@ -24,22 +46,27 @@ offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/开始界面" unique_id=1396039782]
+[node name="Panel" type="TextureRect" parent="CanvasLayer/开始界面" unique_id=1900132826]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_left = 64.0
+offset_top = 36.0
+offset_right = 1216.0
+offset_bottom = 684.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_75xjn")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/开始界面" unique_id=711732717]
 layout_mode = 1
 offset_left = 440.0
-offset_top = 68.0
+offset_top = 134.0
 offset_right = 840.0
-offset_bottom = 218.0
+offset_bottom = 284.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
 text = "DEMO"
 horizontal_alignment = 1
@@ -48,9 +75,9 @@ vertical_alignment = 1
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/开始界面" unique_id=797512439]
 layout_mode = 1
 offset_left = 465.0
-offset_top = 277.0
+offset_top = 360.0
 offset_right = 815.0
-offset_bottom = 627.0
+offset_bottom = 535.0
 alignment = 1
 vertical = true
 
@@ -58,17 +85,63 @@ vertical = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_n6ku5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0mdfe")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mxjnn")
 text = "开始游戏"
-
-[node name="选项" type="Button" parent="CanvasLayer/开始界面/BoxContainer" unique_id=1401921113]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "制作名单"
+icon_alignment = 1
+expand_icon = true
 
 [node name="退出" type="Button" parent="CanvasLayer/开始界面/BoxContainer" unique_id=1201154200]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_5iear")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_lev22")
+theme_override_styles/hover = SubResource("StyleBoxTexture_b0bs0")
 text = "退出游戏"
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("2_m4ijc")
+
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/开始界面" unique_id=261366980]
+layout_mode = 0
+offset_left = 1039.0
+offset_top = 547.0
+offset_right = 1214.0
+offset_bottom = 683.0
+alignment = 1
+vertical = true
+
+[node name="制作名单" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=1001920502]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "制作名单"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=640260221]
+layout_mode = 2
+text = "Merf"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=922561110]
+layout_mode = 2
+text = "失速"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=1860102870]
+layout_mode = 2
+text = "阿瑞"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=56587595]
+layout_mode = 2
+text = "OVOAOVO"
+horizontal_alignment = 1

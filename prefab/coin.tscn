@@ -7,7 +7,8 @@
 [node name="Coin" type="Node2D" unique_id=1372957487]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1223724145]
-scale = Vector2(0.5, 0.5)
+position = Vector2(-2.9999998, 1.9999999)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_igaxq")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1301388744]
