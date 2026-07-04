@@ -9,13 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://bm3qe0sgoqhpu" path="res://level/暂停界面.tscn" id="7_x1dfo"]
 [ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="8_pfaae"]
 
-[node name="Game1" type="Node2D" unique_id=180356448]
+[node name="Game1" type="Node2D" unique_id=180356448 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_dquaa")
 cat_scene = ExtResource("2_mxirh")
 pin_scene = ExtResource("4_mxirh")
 coin_scene = ExtResource("5_ie7yk")
 coin_count = 7
 coin_margin = 100.0
+tile_map = NodePath("Map")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=57827177]
 offset = Vector2(576, 324)

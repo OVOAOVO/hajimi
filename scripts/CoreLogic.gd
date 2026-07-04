@@ -20,6 +20,7 @@ const SPAWN_MARGIN: float = 120.0
 @export var throw_duration: float = 1.0     # 投掷飞行时间（秒）
 @export var coin_count: int = 15            # 随机撒的金币数量
 @export var coin_margin: float = 40.0       # 金币离地图边缘的最小距离
+@export var tile_map: TileMapLayer = null   # 地图 TileMapLayer 引用
 # UI Label 引用（在 _ready 中自动查找）
 var _current_value_label: Label = null
 var _max_value_label: Label = null
@@ -215,23 +216,49 @@ func _update_line() -> void:
 	_line.add_point(cat_pos)
 
 
-## 在地图内随机撒金币
+## 在地图内随机撒金币（避开 TileMapLayer 的物理碰撞区域）
 func _spawn_coins() -> void:
 	if coin_scene == null:
 		return
 	for i in range(coin_count):
 		var coin: Node2D = coin_scene.instantiate()
 		add_child(coin)
-		coin.position = Vector2(
-			randf_range(MAP_LEFT + coin_margin, MAP_RIGHT - coin_margin),
-			randf_range(MAP_TOP + coin_margin, MAP_BOTTOM - coin_margin)
-		)
+		coin.position = _find_valid_coin_position()
 		# 连接 Area2D 的 body_entered 信号，猫碰到金币就消失
 		var area: Area2D = coin.get_node_or_null("Area2D")
 		if area:
 			area.body_entered.connect(_on_coin_body_entered.bind(coin))
 	_coin_alive_count = coin_count
 	_update_coin_ui()
+
+
+## 寻找一个不在 TileMapLayer 碰撞区域内的随机金币位置
+func _find_valid_coin_position() -> Vector2:
+	const MAX_ATTEMPTS := 100
+	for _attempt in range(MAX_ATTEMPTS):
+		var pos := Vector2(
+			randf_range(MAP_LEFT + coin_margin, MAP_RIGHT - coin_margin),
+			randf_range(MAP_TOP + coin_margin, MAP_BOTTOM - coin_margin)
+		)
+		if _is_position_free(pos):
+			return pos
+	# 兜底：返回最后一次随机位置（即使可能被占用）
+	return Vector2(
+		randf_range(MAP_LEFT + coin_margin, MAP_RIGHT - coin_margin),
+		randf_range(MAP_TOP + coin_margin, MAP_BOTTOM - coin_margin)
+	)
+
+
+## 检查某个世界坐标位置是否没有 TileMapLayer 物理碰撞
+func _is_position_free(world_pos: Vector2) -> bool:
+	if tile_map == null:
+		return true
+	var tile_coords := tile_map.local_to_map(world_pos)
+	var tile_data := tile_map.get_cell_tile_data(tile_coords)
+	if tile_data == null:
+		return true
+	# physics_layer 0 有碰撞多边形 → 该位置被占用
+	return tile_data.get_collision_polygons_count(0) == 0
 
 
 ## 刷新金币 UI（已收集数量 / 总数量）
