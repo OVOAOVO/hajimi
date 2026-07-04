@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bk5fpvjyrjf0i"]
 
-[node name="Node2D" type="Node2D" unique_id=462866750]
+[ext_resource type="Script" uid="uid://bauds7ctnn7x7" path="res://addons/LevelManeger/scripts/加载关卡.gd" id="1_hs3h7"]
+
+[node name="Node2D" type="Node2D" unique_id=462866750 node_paths=PackedStringArray("play_button")]
+script = ExtResource("1_hs3h7")
+load_scene = &"uid://bgsr0iywlonv2"
+play_button = NodePath("CanvasLayer/开始界面/BoxContainer/开始")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=417184949]
 
