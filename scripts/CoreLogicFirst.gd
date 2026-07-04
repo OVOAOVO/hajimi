@@ -163,13 +163,14 @@ func _place_pin(at_position: Vector2) -> void:
 		add_child(_current_pin)
 	_current_pin.position = at_position
 
-	# 第一次放置 Pin：切换提示文字
+	# 第一次放置 Pin：淡出插入提示 → 淡入拔出提示
 	if not _pin_placed_once:
 		_pin_placed_once = true
-		if _insert_label:
-			_insert_label.visible = false
+		if _insert_label and _insert_label.visible:
+			_fade_out(_insert_label, 0.3)
 		if _remove_label:
 			_remove_label.visible = true
+			_fade_in(_remove_label, 0.3)
 
 	# 让猫绕 Pin 做圆周运动
 	_start_orbit_on_cat(at_position)
@@ -182,13 +183,13 @@ func _remove_pin() -> void:
 	_current_pin.queue_free()
 	_current_pin = null
 
-	# 关闭所有提示
-	if _insert_label:
-		_insert_label.visible = false
-	if _remove_label:
-		_remove_label.visible = false
-	if _first_tip_control:
-		_first_tip_control.visible = false
+	# 淡出所有提示
+	if _insert_label and _insert_label.visible:
+		_fade_out(_insert_label, 0.3)
+	if _remove_label and _remove_label.visible:
+		_fade_out(_remove_label, 0.3)
+	if _first_tip_control and _first_tip_control.visible:
+		_fade_out(_first_tip_control, 0.3)
 
 	# 猫恢复自由弹跳
 	_stop_orbit_on_cat()
@@ -231,32 +232,41 @@ func _update_first_tip() -> void:
 	# 只在物理启用后（猫已落地）才显示提示
 	if not body.is_physics_processing():
 		return
-	# 第一次落地时显示
+	# 第一次落地时显示并放到屏幕正中心（偏上方），带淡入效果
 	if not _first_landing_done:
 		_first_landing_done = true
 		if _first_tip_control:
 			_first_tip_control.visible = true
+		var screen_center := get_viewport().get_visible_rect().size / 2.0
+		const TIP_OFFSET_Y: float = -120.0  # 向上偏移
+		const FADE_IN_TIME: float = 0.5
 		if _insert_label:
 			_insert_label.visible = true
+			_insert_label.position = screen_center + Vector2(0, TIP_OFFSET_Y) - _insert_label.size / 2.0
+			_fade_in(_insert_label, FADE_IN_TIME)
+		if _remove_label:
+			_remove_label.position = screen_center + Vector2(0, TIP_OFFSET_Y) - _remove_label.size / 2.0
 
-	# 世界坐标 → 屏幕坐标
-	var cat_world_pos: Vector2 = body.global_position
-	var screen_pos := _world_to_screen(cat_world_pos)
 
-	# 将 Label 放在猫上方 100px，水平居中于猫
-	if _insert_label and _insert_label.visible:
-		_insert_label.position = screen_pos + Vector2.UP * 100 - _insert_label.size / 2.0
-	if _remove_label and _remove_label.visible:
-		_remove_label.position = screen_pos + Vector2.UP * 100 - _remove_label.size / 2.0
 
-## 世界坐标转屏幕坐标（CanvasLayer Control 坐标系）
-func _world_to_screen(world_pos: Vector2) -> Vector2:
-	var camera := get_viewport().get_camera_2d()
-	if camera == null:
-		return world_pos
-	var viewport_center := get_viewport().get_visible_rect().size / 2.0
-	var camera_center := camera.global_position + camera.offset
-	return world_pos - camera_center + viewport_center
+## 对 CanvasItem 做淡入（从透明到不透明）
+func _fade_in(target: CanvasItem, duration: float = 0.5) -> void:
+	target.modulate.a = 0.0
+	var tw := create_tween()
+	tw.set_trans(Tween.TRANS_LINEAR)
+	tw.tween_property(target, "modulate:a", 1.0, duration)
+
+
+## 对 CanvasItem 做淡出（从不透明到透明），完成后隐藏
+func _fade_out(target: CanvasItem, duration: float = 0.5) -> void:
+	var tw := create_tween()
+	tw.set_trans(Tween.TRANS_LINEAR)
+	tw.tween_property(target, "modulate:a", 0.0, duration)
+	tw.tween_callback(func():
+		if is_instance_valid(target):
+			target.visible = false
+	)
+
 
 ## 更新 Pin 到 Cat 的连线
 func _update_line() -> void:
