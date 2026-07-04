@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dd2admamutgyk"]
+
+[node name="第一次运行提示" type="Control" unique_id=550227052]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="插入点" type="Label" parent="." unique_id=1264843992]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "按鼠标左键插入锚点"
+
+[node name="拔出点" type="Label" parent="." unique_id=644895963]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "按鼠标右键拔出"

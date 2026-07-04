@@ -71,9 +71,8 @@ max_fall_speed = 400.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1791933442]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_lni28")
-animation = &"Sli"
+animation = &"Roll"
 autoplay = "Sli"
-frame_progress = 0.17729469
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1411382272]
 position = Vector2(-1.0000029, -1.500001)
