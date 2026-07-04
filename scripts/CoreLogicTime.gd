@@ -62,12 +62,12 @@ func _ready() -> void:
 		coin_scene = preload("res://prefab/coin.tscn")
 
 	# 从 CountPanel 场景中查找 UI Label
-	var panel := $CanvasLayer/CountPanelTime/BoxContainer
+	var panel := $CanvasLayer/CountPanelTime/BoxContainer/TextureRect
 	if panel:
 		_current_value_label = panel.get_node_or_null("currentValue")
 
 	# 查找倒计时 Label
-	var panel2 := $CanvasLayer/CountPanelTime/BoxContainer2
+	var panel2 := $CanvasLayer/CountPanelTime/BoxContainer2/TextureRect
 	if panel2:
 		_time_value_label = panel2.get_node_or_null("TimeValue")
 

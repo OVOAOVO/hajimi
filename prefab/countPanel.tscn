@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bxuxqhdboqiat"]
 
+[ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="1_h8yr5"]
+
 [node name="CountPanel" type="Control" unique_id=1512344246]
 layout_mode = 3
 anchors_preset = 15
@@ -10,23 +12,50 @@ grow_vertical = 2
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=249143396]
 layout_mode = 0
-offset_right = 95.0
+offset_right = 240.0
 offset_bottom = 64.0
 
-[node name="currentValue" type="Label" parent="BoxContainer" unique_id=652683160]
+[node name="TextureRect" type="TextureRect" parent="BoxContainer" unique_id=690963122]
 layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_h8yr5")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="BoxContainer/TextureRect" unique_id=1070494582]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 7.0
+offset_right = 148.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 36
+text = "收集数量"
+
+[node name="currentValue" type="Label" parent="BoxContainer/TextureRect" unique_id=652683160]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 7.0
+offset_right = 173.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "0"
 
-[node name="middle" type="Label" parent="BoxContainer" unique_id=450161280]
-layout_mode = 2
+[node name="middle" type="Label" parent="BoxContainer/TextureRect" unique_id=450161280]
+layout_mode = 0
+offset_left = 177.0
+offset_top = 7.0
+offset_right = 191.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "/"
 
-[node name="maxValue" type="Label" parent="BoxContainer" unique_id=1315205432]
-layout_mode = 2
+[node name="maxValue" type="Label" parent="BoxContainer/TextureRect" unique_id=1315205432]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 7.0
+offset_right = 216.0
+offset_bottom = 57.0
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "3"
