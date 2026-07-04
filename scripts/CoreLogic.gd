@@ -20,6 +20,9 @@ const SPAWN_MARGIN: float = 120.0
 @export var throw_duration: float = 1.0     # 投掷飞行时间（秒）
 @export var coin_count: int = 15            # 随机撒的金币数量
 @export var coin_margin: float = 40.0       # 金币离地图边缘的最小距离
+# UI Label 引用（在 _ready 中自动查找）
+var _current_value_label: Label = null
+var _max_value_label: Label = null
 
 # 重力（与 Cat.gd 保持一致）
 const GRAVITY: float = 980.0
@@ -33,6 +36,8 @@ var _current_pin: Node2D = null
 var _current_cat: Node2D = null
 # 连线节点
 var _line: Line2D = null
+# 当前存活金币数量
+var _coin_alive_count: int = 0
 
 
 # ============================================================
@@ -48,8 +53,17 @@ func _ready() -> void:
 	if coin_scene == null:
 		coin_scene = preload("res://prefab/coin.tscn")
 
+	# 从 CountPanel 场景中查找 UI Label
+	var panel := $CanvasLayer/CountPanel/BoxContainer
+	if panel:
+		_current_value_label = panel.get_node_or_null("currentValue")
+		_max_value_label = panel.get_node_or_null("maxValue")
+
 	# 随机撒金币
 	_spawn_coins()
+	# 设置 UI 最大值
+	if _max_value_label:
+		_max_value_label.text = str(coin_count)
 
 	# 只生成一次，扔向屏幕中心
 	spawn_and_throw_to_center()
@@ -204,6 +218,14 @@ func _spawn_coins() -> void:
 		var area: Area2D = coin.get_node_or_null("Area2D")
 		if area:
 			area.body_entered.connect(_on_coin_body_entered.bind(coin))
+	_coin_alive_count = coin_count
+	_update_coin_ui()
+
+
+## 刷新金币 UI（已收集数量 / 总数量）
+func _update_coin_ui() -> void:
+	if _current_value_label:
+		_current_value_label.text = str(coin_count - _coin_alive_count)
 
 
 ## 猫碰到金币时触发，让金币消失（仅在圆周旋转模式下生效）
@@ -217,6 +239,8 @@ func _on_coin_body_entered(body: Node2D, coin: Node2D) -> void:
 	if not cat_body.get("_orbiting"):
 		return
 	coin.queue_free()
+	_coin_alive_count -= 1
+	_update_coin_ui()
 
 
 ## 随机选择地图四条边之一的外侧位置
@@ -276,9 +300,12 @@ func _animate_throw(cat: Node2D, body: Node2D, from: Vector2, to: Vector2) -> vo
 	var spins := randf_range(1.0, 2.0)
 	tween.tween_property(cat, "rotation", TAU * spins * signf(vx), T)
 
-	# 落地后启用物理，让猫受重力继续下落
+	# 落地后启用物理，让猫开始自由弹跳
 	tween.chain().tween_callback(
 		func():
 			if is_instance_valid(body):
+				# 先同步 CharacterBody2D 的世界位置
+				body.global_position = cat.global_position
+				body.velocity = Vector2(randf_range(-200, 200), randf_range(-300, -100))
 				body.set_physics_process(true)
 	)
