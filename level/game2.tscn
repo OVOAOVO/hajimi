@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3iwwhe7x3ucg" path="res://prefab/map2.tscn" id="5_brwoi"]
 [ext_resource type="Texture2D" uid="uid://c7acdrtxxy4c3" path="res://assets/backGround.png" id="5_h6oy5"]
 [ext_resource type="Texture2D" uid="uid://btk8dw4j5sfe3" path="res://assets/block.png" id="6_2jieo"]
+[ext_resource type="Script" uid="uid://dxskqp3e0eotq" path="res://scripts/cameraShake.gd" id="7_433nw"]
 
 [node name="Game2" type="Node2D" unique_id=30171497 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_4r541")
@@ -81,6 +82,7 @@ expand_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1074139911]
 offset = Vector2(576, 324)
+script = ExtResource("7_433nw")
 
 [node name="TileMapLayer" parent="." unique_id=1207361876 instance=ExtResource("5_brwoi")]
 visible = false

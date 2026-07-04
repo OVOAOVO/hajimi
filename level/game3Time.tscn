@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="4_ejfbh"]
 [ext_resource type="PackedScene" uid="uid://d1nxgepv7ntw4" path="res://prefab/countPanelTime.tscn" id="4_gbc74"]
 [ext_resource type="Texture2D" uid="uid://c7acdrtxxy4c3" path="res://assets/backGround.png" id="5_dlvv5"]
+[ext_resource type="Script" uid="uid://dxskqp3e0eotq" path="res://scripts/cameraShake.gd" id="6_eaipt"]
 
 [node name="Game3Time" type="Node2D" unique_id=1812593754 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_vd01b")
@@ -29,6 +30,7 @@ texture = ExtResource("5_dlvv5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1814350777]
 offset = Vector2(576, 324)
+script = ExtResource("6_eaipt")
 
 [node name="Map" parent="." unique_id=1207361876 instance=ExtResource("1_gbc74")]
 visible = false

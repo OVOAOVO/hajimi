@@ -2,6 +2,12 @@ extends CharacterBody2D
 
 
 # ============================================================
+# 信号
+# ============================================================
+signal wall_hit(collision_point: Vector2, normal: Vector2)
+
+
+# ============================================================
 # 物理参数
 # ============================================================
 @export var gravity: float = 980.0               # 重力加速度（仅第一次下落使用）
@@ -39,6 +45,7 @@ func _physics_process(delta: float) -> void:
 			orbit_speed = -orbit_speed
 			_orbit_angle = (global_position - _orbit_center).angle()
 			AudioManager.play_bounce()
+			wall_hit.emit(collision.get_position(), collision.get_normal())
 		# 面朝运动切线方向
 		rotation = _orbit_angle + PI / 2.0
 		return
@@ -70,6 +77,7 @@ func _physics_process(delta: float) -> void:
 			sin(angle) * bounce_strength
 		)
 		AudioManager.play_bounce()
+		wall_hit.emit(collision.get_position(), normal)
 
 
 # ============================================================

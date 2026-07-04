@@ -132,6 +132,11 @@ func spawn_and_throw_to(spawn_pos: Vector2, target_pos: Vector2) -> Node2D:
 		body.set_script(preload("res://scripts/CatController.gd"))
 		body.set_physics_process(false)
 
+		# 连接碰撞信号 → 相机抖动
+		var camera := get_node_or_null("Camera2D")
+		if camera and camera.has_method("on_wall_hit"):
+			body.wall_hit.connect(camera.on_wall_hit)
+
 	# 启动投掷动画，传入 body 以便结束后启用物理
 	_animate_throw(cat, body, spawn_pos, target_pos)
 	return cat
