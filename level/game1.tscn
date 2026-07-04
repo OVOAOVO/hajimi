@@ -12,7 +12,7 @@ script = ExtResource("1_dquaa")
 cat_scene = ExtResource("2_mxirh")
 pin_scene = ExtResource("4_mxirh")
 coin_scene = ExtResource("5_ie7yk")
-coin_count = 5
+coin_count = 7
 coin_margin = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=57827177]

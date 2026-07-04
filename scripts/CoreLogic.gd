@@ -38,6 +38,8 @@ var _current_cat: Node2D = null
 var _line: Line2D = null
 # 当前存活金币数量
 var _coin_alive_count: int = 0
+# 是否允许玩家输入（投掷动画结束后才开启）
+var _input_enabled: bool = false
 
 
 # ============================================================
@@ -74,6 +76,8 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not _input_enabled:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			# 左键：没有 Pin 时才创建新的
@@ -300,7 +304,7 @@ func _animate_throw(cat: Node2D, body: Node2D, from: Vector2, to: Vector2) -> vo
 	var spins := randf_range(1.0, 2.0)
 	tween.tween_property(cat, "rotation", TAU * spins * signf(vx), T)
 
-	# 落地后启用物理，让猫开始自由弹跳
+	# 落地后启用物理，让猫开始自由弹跳，同时开放玩家输入
 	tween.chain().tween_callback(
 		func():
 			if is_instance_valid(body):
@@ -308,4 +312,5 @@ func _animate_throw(cat: Node2D, body: Node2D, from: Vector2, to: Vector2) -> vo
 				body.global_position = cat.global_position
 				body.velocity = Vector2(randf_range(-200, 200), randf_range(-300, -100))
 				body.set_physics_process(true)
+			_input_enabled = true
 	)
