@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bgsr0iywlonv2"]
 
-[ext_resource type="Script" uid="uid://dfoo6pntfo23e" path="res://scripts/CoreLogic.gd" id="1_dquaa"]
+[ext_resource type="Script" uid="uid://c1ppcsdofop8r" path="res://scripts/CoreLogicFirst.gd" id="1_pfaae"]
 [ext_resource type="PackedScene" uid="uid://c11lsej2wglye" path="res://prefab/cat.tscn" id="2_mxirh"]
 [ext_resource type="PackedScene" uid="uid://c48sunbtl2f8y" path="res://prefab/map.tscn" id="3_ie7yk"]
 [ext_resource type="PackedScene" uid="uid://dig1ptu56oqdy" path="res://prefab/pin.tscn" id="4_mxirh"]
 [ext_resource type="PackedScene" uid="uid://ytuhgoau7n13" path="res://prefab/coin.tscn" id="5_ie7yk"]
+[ext_resource type="PackedScene" uid="uid://dd2admamutgyk" path="res://level/第一次运行提示.tscn" id="6_e6icd"]
 [ext_resource type="PackedScene" uid="uid://bxuxqhdboqiat" path="res://prefab/countPanel.tscn" id="6_fjfph"]
 [ext_resource type="PackedScene" uid="uid://bm3qe0sgoqhpu" path="res://level/暂停界面.tscn" id="7_x1dfo"]
 [ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="8_pfaae"]
 
 [node name="Game1" type="Node2D" unique_id=180356448 node_paths=PackedStringArray("tile_map")]
-script = ExtResource("1_dquaa")
+script = ExtResource("1_pfaae")
 cat_scene = ExtResource("2_mxirh")
 pin_scene = ExtResource("4_mxirh")
 coin_scene = ExtResource("5_ie7yk")
@@ -24,6 +25,9 @@ offset = Vector2(576, 324)
 [node name="Map" parent="." unique_id=1224135724 instance=ExtResource("3_ie7yk")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1069455945]
+
+[node name="第一次运行提示" parent="CanvasLayer" unique_id=550227052 instance=ExtResource("6_e6icd")]
+visible = false
 
 [node name="CountPanel" parent="CanvasLayer" unique_id=1512344246 instance=ExtResource("6_fjfph")]
 offset_left = 9.0
