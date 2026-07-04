@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ytuhgoau7n13" path="res://prefab/coin.tscn" id="4_eaipt"]
 [ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="4_ejfbh"]
 [ext_resource type="PackedScene" uid="uid://d1nxgepv7ntw4" path="res://prefab/countPanelTime.tscn" id="4_gbc74"]
+[ext_resource type="Texture2D" uid="uid://c7acdrtxxy4c3" path="res://assets/backGround.png" id="5_dlvv5"]
 
 [node name="Game3Time" type="Node2D" unique_id=1812593754 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_vd01b")
@@ -20,10 +21,17 @@ coin_respawn_interval = 1.0
 tile_map = NodePath("Map")
 _time_remaining = 80.0
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=773417515]
+z_index = -1
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_dlvv5")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1814350777]
 offset = Vector2(576, 324)
 
 [node name="Map" parent="." unique_id=1207361876 instance=ExtResource("1_gbc74")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1072070079]
 

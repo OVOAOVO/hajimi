@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://rbsjbm3rd6fn" path="res://level/结算界面.tscn" id="4_8x67e"]
 [ext_resource type="PackedScene" uid="uid://ytuhgoau7n13" path="res://prefab/coin.tscn" id="4_brwoi"]
 [ext_resource type="PackedScene" uid="uid://3iwwhe7x3ucg" path="res://prefab/map2.tscn" id="5_brwoi"]
+[ext_resource type="Texture2D" uid="uid://c7acdrtxxy4c3" path="res://assets/backGround.png" id="5_h6oy5"]
+[ext_resource type="Texture2D" uid="uid://btk8dw4j5sfe3" path="res://assets/block.png" id="6_2jieo"]
 
 [node name="Game2" type="Node2D" unique_id=30171497 node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_4r541")
@@ -17,10 +19,71 @@ coin_scene = ExtResource("4_brwoi")
 coin_margin = 100.0
 tile_map = NodePath("TileMapLayer")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=285122881]
+z_index = -1
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_h6oy5")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=543187937]
+offset_left = 836.0
+offset_top = 72.0
+offset_right = 876.0
+offset_bottom = 112.0
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1555395502]
+offset_left = 835.0
+offset_top = 168.00002
+offset_right = 875.0
+offset_bottom = 208.00002
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=440240411]
+offset_left = 836.0
+offset_top = 267.0
+offset_right = 876.0
+offset_bottom = 307.0
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="." unique_id=210766235]
+offset_left = 81.0
+offset_top = 222.0
+offset_right = 131.0
+offset_bottom = 262.0
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="." unique_id=1916700018]
+offset_left = 183.0
+offset_top = 223.00002
+offset_right = 233.0
+offset_bottom = 263.0
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="." unique_id=1737212220]
+offset_left = 253.0
+offset_top = 223.0
+offset_right = 303.0
+offset_bottom = 263.0
+scale = Vector2(2.24, 2.4800003)
+texture = ExtResource("6_2jieo")
+expand_mode = 1
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1074139911]
 offset = Vector2(576, 324)
 
 [node name="TileMapLayer" parent="." unique_id=1207361876 instance=ExtResource("5_brwoi")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=331700440]
 

@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://by3puhl5ymfln"]
 
+[ext_resource type="Texture2D" uid="uid://m3d7ha2ekb54" path="res://assets/startMenuBack.png" id="1_o4f5h"]
+[ext_resource type="Texture2D" uid="uid://j7gfpj7cvwaf" path="res://assets/normalButton.png" id="2_3tisr"]
 [ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_e3myt"]
+[ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="3_2ip0m"]
+[ext_resource type="Texture2D" uid="uid://dfsrsc1iyqnc5" path="res://assets/hoverButton.png" id="4_eca0t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fp7m5"]
+texture = ExtResource("2_3tisr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtm14"]
+texture = ExtResource("3_2ip0m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rhdet"]
+texture = ExtResource("4_eca0t")
 
 [node name="通关结算" type="Control" unique_id=1405941113]
 layout_mode = 3
@@ -14,7 +27,7 @@ offset_bottom = -684.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="." unique_id=634761078]
+[node name="Panel" type="TextureRect" parent="." unique_id=1239192171]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +36,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_o4f5h")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=1398896115]
 layout_mode = 0
@@ -30,8 +45,9 @@ offset_left = 446.0
 offset_top = 154.0
 offset_right = 846.0
 offset_bottom = 304.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "牛"
+text = "夯"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -40,7 +56,7 @@ layout_mode = 0
 offset_left = 470.0
 offset_top = 387.0
 offset_right = 820.0
-offset_bottom = 562.0
+offset_bottom = 474.5
 alignment = 1
 vertical = true
 
@@ -48,5 +64,11 @@ vertical = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_fp7m5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qtm14")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rhdet")
 text = "退出游戏"
 script = ExtResource("2_e3myt")
