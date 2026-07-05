@@ -13,6 +13,10 @@ var bounce_sounds: Array[AudioStream] = [
 	preload("res://assets/SFX/哈吉米弹弹弹2.wav"),
 	preload("res://assets/SFX/哈吉米弹弹弹3.wav"),
 	preload("res://assets/SFX/哈吉米弹弹弹4.wav"),
+	preload("res://assets/SFX/哈吉米弹弹弹1.wav5.wav"),
+	preload("res://assets/SFX/哈吉米弹弹弹1.wav6.wav"),
+	preload("res://assets/SFX/哈吉米弹弹弹1.wav7.wav"),
+	preload("res://assets/SFX/哈吉米弹弹弹1.wav8.wav"),
 ]
 var eat_sounds: Array[AudioStream] = [
 	preload("res://assets/SFX/c吃东西 1.wav"),
@@ -85,7 +89,7 @@ func create_music_player():
 	music_player.stream = background_music
 	music_player.bus = "Music"
 	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	music_player.volume_db = 0.0
+	music_player.volume_db = -8.0
 	music_player.autoplay = false
 	music_player.finished.connect(_on_music_finished)
 	add_child(music_player)
