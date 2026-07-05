@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bk5fpvjyrjf0i"]
 
 [ext_resource type="Script" uid="uid://bauds7ctnn7x7" path="res://addons/LevelManeger/scripts/加载关卡.gd" id="1_hs3h7"]
-[ext_resource type="Texture2D" uid="uid://m3d7ha2ekb54" path="res://assets/startMenuBack.png" id="2_75xjn"]
+[ext_resource type="Texture2D" uid="uid://bdfvpyugmxcf2" path="res://assets/67主界面.png" id="2_0mdfe"]
 [ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_m4ijc"]
 [ext_resource type="Texture2D" uid="uid://j7gfpj7cvwaf" path="res://assets/normalButton.png" id="3_n6ku5"]
 [ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="4_mxjnn"]
@@ -57,18 +57,19 @@ offset_right = 1216.0
 offset_bottom = 684.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_75xjn")
+texture = ExtResource("2_0mdfe")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/开始界面" unique_id=711732717]
+visible = false
 layout_mode = 1
-offset_left = 440.0
-offset_top = 134.0
-offset_right = 840.0
-offset_bottom = 284.0
+offset_left = 140.0
+offset_top = 118.0
+offset_right = 1163.0
+offset_bottom = 268.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "DEMO"
+text = "Schrödinger‘s Anchor"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -88,10 +89,11 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_n6ku5")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0mdfe")
 theme_override_styles/hover = SubResource("StyleBoxTexture_mxjnn")
-text = "开始游戏"
+text = "开始观测（抛猫！）"
 icon_alignment = 1
 expand_icon = true
 
@@ -102,15 +104,17 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_5iear")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_lev22")
 theme_override_styles/hover = SubResource("StyleBoxTexture_b0bs0")
-text = "退出游戏"
+text = "结束观测"
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_m4ijc")
 
 [node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/开始界面" unique_id=261366980]
+visible = false
 layout_mode = 0
 offset_left = 1039.0
 offset_top = 547.0
@@ -128,20 +132,20 @@ horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=640260221]
 layout_mode = 2
-text = "Merf"
+text = "策划 Merf"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=922561110]
 layout_mode = 2
-text = "失速"
+text = "音效 失速"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=1860102870]
 layout_mode = 2
-text = "阿瑞"
+text = "美术 阿瑞"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="CanvasLayer/开始界面/BoxContainer2" unique_id=56587595]
 layout_mode = 2
-text = "OVOAOVO"
+text = "程序 OVOAOVO"
 horizontal_alignment = 1

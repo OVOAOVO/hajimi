@@ -29,14 +29,14 @@ offset_top = 7.0
 offset_right = 167.0
 offset_bottom = 57.0
 theme_override_font_sizes/font_size = 36
-text = "剩余时间: "
+text = "剩余时间"
 
 [node name="TimeValue" type="Label" parent="BoxContainer2/TextureRect" unique_id=1521691318]
 layout_mode = 0
-offset_left = 171.0
-offset_top = 7.0
-offset_right = 172.0
-offset_bottom = 57.0
+offset_left = 159.0
+offset_top = 5.0
+offset_right = 160.0
+offset_bottom = 55.0
 theme_override_font_sizes/font_size = 36
 
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=385154192]

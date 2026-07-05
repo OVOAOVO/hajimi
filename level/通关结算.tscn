@@ -48,7 +48,7 @@ offset_right = 846.0
 offset_bottom = 304.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "夯"
+text = "猫生圆满"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -68,10 +68,11 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxTexture_fp7m5")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qtm14")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rhdet")
-text = "退出游戏"
+text = "喵宇宙终结"
 script = ExtResource("2_e3myt")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1455287445]

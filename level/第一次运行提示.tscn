@@ -14,7 +14,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 50
-text = "按鼠标左键插入锚点"
+text = "猫的状态不可观测，左键点击插入锚点"
 
 [node name="拔出点" type="Label" parent="." unique_id=644895963]
 visible = false
@@ -22,7 +22,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 50
-text = "按鼠标右键拔出"
+text = "猫与锚点量子纠缠，右键点击拔出锚点"
 
 [node name="旋转提示" type="Label" parent="." unique_id=276918937]
 visible = false
@@ -30,4 +30,5 @@ layout_mode = 0
 offset_right = 350.0
 offset_bottom = 69.0
 theme_override_font_sizes/font_size = 50
-text = "只有旋转才能吃到小鱼干~"
+text = "量子纠缠态的猫才能吃到猫粮
+尝试让猫吃到更多小鱼干吧~"

@@ -59,14 +59,14 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="结算界面" unique_id=191891106]
 layout_mode = 0
-offset_left = 440.0
+offset_left = 356.0
 offset_top = 148.0
-offset_right = 840.0
+offset_right = 893.0
 offset_bottom = 298.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "你过关"
-horizontal_alignment = 1
+text = "🐱观测成功"
+horizontal_alignment = 3
 vertical_alignment = 1
 
 [node name="BoxContainer" type="BoxContainer" parent="结算界面" unique_id=1182062451]
@@ -85,10 +85,11 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_jcyei")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_lu570")
 theme_override_styles/hover = SubResource("StyleBoxTexture_u20xh")
-text = "下一关"
+text = "继续观测"
 script = ExtResource("1_s07nm")
 
 [node name="退出" type="Button" parent="结算界面/BoxContainer" unique_id=504581236]
@@ -98,8 +99,9 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_3wx21")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_kkflm")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3en05")
-text = "退出游戏"
+text = "结束观测"
 script = ExtResource("2_0l53m")

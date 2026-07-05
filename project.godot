@@ -28,6 +28,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/LevelManeger/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://c5h3t4gsvyjg"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
