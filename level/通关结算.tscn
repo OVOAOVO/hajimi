@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cr5wxugcrmrfo" path="res://scripts/QuitGame.gd" id="2_e3myt"]
 [ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="3_2ip0m"]
 [ext_resource type="Texture2D" uid="uid://dfsrsc1iyqnc5" path="res://assets/hoverButton.png" id="4_eca0t"]
+[ext_resource type="AudioStream" uid="uid://670cn875iq1t" path="res://assets/SFX/胜利音效.wav" id="6_2ip0m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fp7m5"]
 texture = ExtResource("2_3tisr")
@@ -72,3 +73,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_qtm14")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rhdet")
 text = "退出游戏"
 script = ExtResource("2_e3myt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1455287445]
+stream = ExtResource("6_2ip0m")
+autoplay = true

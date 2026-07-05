@@ -1,6 +1,6 @@
 extends Node
 
-@export var pool_size: int = 10
+@export var pool_size: int = 5
 @export var default_bus: String = "SFX"
  
 var audio_pool: Array[AudioStreamPlayer] = []
