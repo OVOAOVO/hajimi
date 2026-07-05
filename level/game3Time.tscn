@@ -25,8 +25,8 @@ tier_3_min = 50
 tier_4_min = 75
 tier_1_label = "Level1观测初现"
 tier_2_label = "Level2纠缠达成"
-tier_3_label = "Level3量子饱腹！"
-tier_4_label = "Level4薛定谔圆满！！"
+tier_3_label = "Level3量子饱腹"
+tier_4_label = "Level4薛定谔圆满"
 _time_remaining = 60.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=773417515]
