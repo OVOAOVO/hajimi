@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cud0rqtkrs106"
+path="res://.godot/imported/win fina.wav-550aff5cc4997e00ef15091afbc38d8f.sample"
+
+[deps]
+
+source_file="res://assets/SFX/win fina.wav"
+dest_files=["res://.godot/imported/win fina.wav-550aff5cc4997e00ef15091afbc38d8f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
