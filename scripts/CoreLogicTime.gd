@@ -98,6 +98,10 @@ func _input(event: InputEvent) -> void:
 		if pause_panel:
 			pause_panel.visible = not pause_panel.visible
 			get_tree().paused = pause_panel.visible
+			if pause_panel.visible:
+				AudioManager.pause_background_music()
+			else:
+				AudioManager.resume_background_music()
 		return
 
 	if not _input_enabled:
@@ -123,6 +127,7 @@ func spawn_and_throw_to_center() -> Node2D:
 
 ## 在指定地图外侧位置生成一只猫并扔向目标点
 func spawn_and_throw_to(spawn_pos: Vector2, target_pos: Vector2) -> Node2D:
+	AudioManager.play_begin()
 	if cat_scene == null:
 		push_error("CoreLogic: cat_scene 未设置！")
 		return null
@@ -233,6 +238,7 @@ func _update_timer(delta: float) -> void:
 		_time_value_label.text = str(max(curr, 0))
 	# 倒计时到 0
 	if _time_remaining <= 0.0:
+		AudioManager.play_win()
 		_time_remaining = 0.0
 		_timer_running = false
 		_show_settlement()
@@ -319,7 +325,6 @@ func _update_coin_ui() -> void:
 ## 显示结算界面并暂停游戏
 func _show_settlement() -> void:
 	var settlement := $CanvasLayer.get_node_or_null("结算界面")
-	AudioManager.play_win()
 	if settlement:
 		settlement.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		settlement.visible = true

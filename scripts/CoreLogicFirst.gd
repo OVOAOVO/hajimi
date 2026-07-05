@@ -99,6 +99,10 @@ func _input(event: InputEvent) -> void:
 		if pause_panel:
 			pause_panel.visible = not pause_panel.visible
 			get_tree().paused = pause_panel.visible
+			if pause_panel.visible:
+				AudioManager.pause_background_music()
+			else:
+				AudioManager.resume_background_music()
 		return
 
 	if not _input_enabled:
@@ -124,6 +128,7 @@ func spawn_and_throw_to_center() -> Node2D:
 
 ## 在指定地图外侧位置生成一只猫并扔向目标点
 func spawn_and_throw_to(spawn_pos: Vector2, target_pos: Vector2) -> Node2D:
+	AudioManager.play_begin()
 	if cat_scene == null:
 		push_error("CoreLogic: cat_scene 未设置！")
 		return null
@@ -408,6 +413,7 @@ func _on_coin_body_entered(body: Node2D, coin: Node2D) -> void:
 	AudioManager.play_eat()
 	# 金币吃完了 → 显示结算界面并暂停
 	if _coin_alive_count <= 0:
+		AudioManager.play_win()
 		_show_settlement()
 
 
