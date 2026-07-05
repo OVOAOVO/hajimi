@@ -16,11 +16,11 @@ script = ExtResource("1_vd01b")
 cat_scene = ExtResource("2_km7p3")
 pin_scene = ExtResource("3_dlvv5")
 coin_scene = ExtResource("4_eaipt")
-coin_count = 100
+coin_count = 10
 coin_margin = 100.0
 coin_respawn_interval = 1.0
 tile_map = NodePath("Map")
-_time_remaining = 80.0
+_time_remaining = 15.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=773417515]
 z_index = -1

@@ -22,6 +22,18 @@ const SPAWN_MARGIN: float = 120.0
 @export var coin_margin: float = 40.0       # 金币离地图边缘的最小距离
 @export var coin_respawn_interval: float = 2.0  # 金币重生间隔（秒）
 @export var tile_map: TileMapLayer = null   # 地图 TileMapLayer 引用
+
+# ============================================================
+# 结算评级配置（四个等级的分段值，编辑器可调）
+# ============================================================
+@export var tier_2_min: int = 5       # 达到此数量进入 2 级
+@export var tier_3_min: int = 10      # 达到此数量进入 3 级
+@export var tier_4_min: int = 15      # 达到此数量进入 4 级（最高级）
+@export var tier_1_label: String = "再接再厉！"
+@export var tier_2_label: String = "不错哦~"
+@export var tier_3_label: String = "太厉害了！"
+@export var tier_4_label: String = "完美通关！！"
+
 # UI Label 引用（在 _ready 中自动查找）
 var _current_value_label: Label = null
 var _time_value_label: Label = null
@@ -322,14 +334,32 @@ func _update_coin_ui() -> void:
 		_current_value_label.text = str(_coin_collected)
 
 
+## 根据收集数量返回对应的评级文字
+func _get_tier_label() -> String:
+	if _coin_collected >= tier_4_min:
+		return tier_4_label
+	elif _coin_collected >= tier_3_min:
+		return tier_3_label
+	elif _coin_collected >= tier_2_min:
+		return tier_2_label
+	else:
+		return tier_1_label
+
+
 ## 显示结算界面并暂停游戏
 func _show_settlement() -> void:
-	var settlement := $CanvasLayer.get_node_or_null("结算界面")
-	if settlement:
-		settlement.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-		settlement.visible = true
+	# 结算界面.tscn 结构: Node2D(根) → 结算界面(Control) → Label
+	var settlement_root := $CanvasLayer.get_node_or_null("结算界面")
+	if settlement_root:
+		settlement_root.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+		settlement_root.visible = true
+		# 根据收集数量替换评级文字
+		var control := settlement_root.get_node_or_null("结算界面")
+		if control:
+			var label := control.get_node_or_null("Label")
+			if label:
+				label.text = _get_tier_label()
 		get_tree().paused = true
-		
 
 
 ## 猫碰到金币时触发，让金币消失（仅在圆周旋转模式下生效）
