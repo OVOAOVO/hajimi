@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://j7gfpj7cvwaf" path="res://assets/normalButton.png" id="2_pnwl3"]
 [ext_resource type="Texture2D" uid="uid://34mppb2i4hjf" path="res://assets/pressedButton.png" id="3_eyil3"]
 [ext_resource type="Texture2D" uid="uid://dfsrsc1iyqnc5" path="res://assets/hoverButton.png" id="4_01fgv"]
+[ext_resource type="Script" uid="uid://crxtw3wbc1y3r" path="res://level/audio_slider.gd" id="7_1hyen"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ke840"]
 texture = ExtResource("2_pnwl3")
@@ -87,3 +88,11 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_1hyen")
 theme_override_styles/hover = SubResource("StyleBoxTexture_3pq33")
 text = "退出游戏"
 script = ExtResource("1_bd1ni")
+
+[node name="HSlider" type="HSlider" parent="." unique_id=1288769249]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 233.0
+offset_right = 821.0
+offset_bottom = 249.0
+script = ExtResource("7_1hyen")
